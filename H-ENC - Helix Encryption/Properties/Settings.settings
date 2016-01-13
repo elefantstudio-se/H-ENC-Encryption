@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="H_ENC___Helix_Encryption.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="defaultFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="defaultCompress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data\DENC\</Value>
+    </Setting>
+    <Setting Name="ckMD5" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ckSHA1" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="encPATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data\HENC\</Value>
+    </Setting>
+    <Setting Name="extFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">.henc</Value>
+    </Setting>
+    <Setting Name="passkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="keyspice" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="pubkey" GenerateDefaultValueInCode="false" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="decPATH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data\DENC\</Value>
+    </Setting>
+    <Setting Name="dec_last" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DecrFolder + inFile.Substring(0, inFile.LastIndexOf(".")) + ".denc";</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

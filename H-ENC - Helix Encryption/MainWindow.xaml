@@ -1,0 +1,103 @@
+﻿<controls:MetroWindow x:Name="Main" x:Class="H_ENC___Helix_Encryption.Enc"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="H-ENC - Helix Encryption"  Loaded="EnC_OnLoad" Closed="Enc_Closed" Height="336" Width="431" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" ShowMaxRestoreButton="False" SaveWindowPosition="False" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Foreground="#FFFF6D6D" GlowBrush="{DynamicResource AccentColorBrush}">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="settings" Click="btnprKey_Click"/>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20">
+                        <Rectangle.Fill>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_creditcard}" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <TabControl HorizontalAlignment="Left" Height="310" VerticalAlignment="Top" Width="421" Margin="0,0,0,-2">
+        <TabItem Header="Encrypt">
+            <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Margin="0,0,-6,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*"/>
+                    <ColumnDefinition Width="88*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Folder:" HorizontalAlignment="Left" Height="29" Margin="23,32,0,0" VerticalAlignment="Top" Width="51" FontWeight="Bold"/>
+                <TextBox PreviewMouseLeftButtonDown="fileopen_Click" x:Name="fileopen" controls:TextBoxHelper.Watermark="Click to choose..." HorizontalAlignment="Left" Height="18" Margin="29,57,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="227" AcceptsTab="True" CharacterCasing="Upper" IsReadOnly="True" IsUndoEnabled="False" BorderBrush="#CC119EDA" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnDoit" Content="Do it !" HorizontalAlignment="Left" Height="29" Margin="147,149,0,0" VerticalAlignment="Top" Width="109" Click="doit_Click" BorderBrush="#CC119EDA" Grid.ColumnSpan="2"/>
+                <Button x:Name="btnprKey" Click="btnprKey_Click" Content="Settings" HorizontalAlignment="Left" Height="31" Margin="23,149,0,0" VerticalAlignment="Top" Width="119" BorderBrush="#CC119EDA"/>
+                <TextBox HorizontalAlignment="Left" x:Name="txName" controls:TextBoxHelper.Watermark="Write a file name ( without .Extension )" Height="20" Margin="29,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="227" BorderBrush="#FF3EAEDE" Grid.ColumnSpan="2"/>
+                <StatusBar HorizontalAlignment="Left" Height="29" Margin="0,230,0,0" VerticalAlignment="Top" Width="417" Background="#FFE3E3E3" Grid.ColumnSpan="2">
+                    <Label x:Name="lblstats" Content="Progress:" Height="29" Width="66" FontWeight="Bold"/>
+                    <Controls:MetroProgressBar x:Name="prgBar" Height="13" RenderTransformOrigin="0.5,0.5" Width="303" Foreground="#FF3EAEDE" Value="+0" Cursor="Wait" Background="#FF333333" >
+                        <controls:MetroProgressBar.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleY="-1"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </controls:MetroProgressBar.RenderTransform>
+                    </Controls:MetroProgressBar>
+                    <TextBlock Text="{Binding ElementName=prgBar, Path=Value, StringFormat={}{0:0}%}" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Width="25" />
+                </StatusBar>
+                <Image Margin="150,76,36,101" Source="locked_ok.png" Stretch="Fill" Grid.Column="1"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Decrypt">
+            <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Margin="0,-1,0,1">
+                <Button x:Name="DecButton" Content="De-Helix It!" HorizontalAlignment="Left" Height="31" Margin="301,218,0,0" VerticalAlignment="Top" Width="100" BorderBrush="#FF57ACDB" Click="DecButton_Click"/>
+                <ListView x:Name="lstBrow1" HorizontalAlignment="Left" Height="203" Margin="10,10,0,0" VerticalAlignment="Top" Width="391" BorderBrush="#FF87ACDB" SelectionMode="Single">
+                    <ListView.ContextMenu>
+                        <ContextMenu Name="HENC_MEN" StaysOpen="False">
+                            <ContextMenu.BitmapEffect>
+                                <BitmapEffectGroup/>
+                            </ContextMenu.BitmapEffect>
+                            <MenuItem Header="Decrypt" Name="DecryptHENC" Foreground="#FF57ACDB">
+                                <MenuItem.ItemBindingGroup>
+                                    <BindingGroup/>
+                                </MenuItem.ItemBindingGroup>
+                            </MenuItem>
+                            <MenuItem Header="Delete" Name="DeleteHENC" Foreground="#FF57ACDB"/>
+                            <MenuItem Header="Refresh files" Click="Refresh_Click" Name="Refresh" Foreground="#FF57ACDB">
+                                <MenuItem.ItemBindingGroup>
+                                    <BindingGroup/>
+                                </MenuItem.ItemBindingGroup>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListView.View>
+                        <GridView AllowsColumnReorder="False"/>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </TabItem>
+        <TabItem Header="Log" HorizontalAlignment="Left" Height="41" VerticalAlignment="Top" Width="112">
+            <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+                <ListBox x:Name="lstbox1" HorizontalAlignment="Left" Height="207" Margin="10,10,0,0" VerticalAlignment="Top" Width="401" BorderBrush="#CC119EDA">
+                    <ListBoxItem Content="[H-ENC LOG] Init:"/>
+                </ListBox>
+                <Button x:Name="btnSave_log" Content="Save log" HorizontalAlignment="Left" Height="16" Margin="10,224,0,0" VerticalAlignment="Top" Width="66" BorderBrush="#CC119EDA" IsEnabled="False"/>
+                <Button x:Name="btnClear" Content="Clear" HorizontalAlignment="Left" Height="25" Margin="91,224,0,0" VerticalAlignment="Top" Width="71" BorderBrush="#CC119EDA" Click="btnClear_Click"/>
+            </Grid>
+        </TabItem>
+        <TabItem Header="about">
+            <Grid Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}" Margin="0,0,-6,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*"/>
+                    <ColumnDefinition Width="88*"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="159" Margin="10,10,0,0" VerticalAlignment="Top" Width="397" Source="elefant.jpg">
+
+                </Image>
+                <TextBox x:Name="txAbout" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="80" Margin="10,169,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="397" Background="{x:Null}" CaretBrush="#FFA64B4B" Foreground="#FF57ACDB" IsInactiveSelectionHighlightEnabled="True" BorderBrush="{x:Null}" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" AllowDrop="False" IsReadOnly="True" IsUndoEnabled="False"/>
+            </Grid>
+        </TabItem>
+    </TabControl>
+
+
+</controls:MetroWindow>
